@@ -62,5 +62,5 @@ func shutdownWebServer() {
 
 func main() {
 	whenLoadBrowserURL() //you need only this line for running this code in code-engine
-	//startWebServer() //comment this line in to start with local webserver on your machine
+	startWebServer()
 }
