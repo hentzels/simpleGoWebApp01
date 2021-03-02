@@ -44,9 +44,9 @@ func handler(response http.ResponseWriter, request *http.Request) {
 	//read in page
 	testpage, err := readInPage("TestPage")
 	if err != nil {
-		//show page in console
+		//show err in console
 		fmt.Println("\n", "readError: ", err)
-		//print page to browser
+		//print err to browser
 		fmt.Fprintf(response, "<html>sh-app<h1>readError: %s</h1></html>", err)
 	} else {
 		//show page in console
@@ -69,6 +69,6 @@ func shutdownWebServer() {
 }
 
 func main() {
-	whenLoadBrowserURL() //you need only this line for running this code in code-engine
+	whenLoadBrowserURL()
 	startWebServer()
 }
