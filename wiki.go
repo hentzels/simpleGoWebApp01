@@ -42,11 +42,19 @@ func testFunctions() {
 // web server functions:
 func handler(response http.ResponseWriter, request *http.Request) {
 	//read in page
-	testpage, _ := readInPage("TestPage")
-	//show page in console
-	fmt.Println("\n", string(testpage.Title), string(testpage.Body))
-	//print page to browser
-	fmt.Fprintf(response, "<html><h1>%s</h1><div>%s</div></html>", testpage.Title, testpage.Body)
+	testpage, err := readInPage("TestPage")
+	if err != nil {
+		//show page in console
+		fmt.Println("\n", "readError: ", err)
+		//print page to browser
+		fmt.Fprintf(response, "<html>sh-app<h1>readError: %s</h1></html>", err)
+	} else {
+		//show page in console
+		fmt.Println("\n", string(testpage.Title), string(testpage.Body))
+		//print page to browser
+		fmt.Fprintf(response, "<html>sh-app<h1>%s</h1><div>%s</div></html>", testpage.Title, testpage.Body)
+	}
+
 }
 func whenLoadBrowserURL() {
 	//when browser URL is loaded it starts handler function
