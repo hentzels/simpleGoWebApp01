@@ -10,6 +10,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 )
 
 type Page struct {
@@ -23,7 +24,15 @@ func (page *Page) writeOutPage() error {
 }
 func readInPage(title string) (*Page, error) {
 	filename := title + ".txt"
-	body, err := ioutil.ReadFile(filename)
+
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(dir)
+	path := filepath.Join(dir, filename)
+
+	body, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 
